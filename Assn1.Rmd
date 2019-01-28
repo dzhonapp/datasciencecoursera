@@ -1,0 +1,94 @@
+---
+title: "Assignment1"
+author: "Berdimyrat Mammedov"
+date: "January 27, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+This is an Assignment 1 markdown document. 
+<!--  -->
+###.3 Missing values are removed here!
+```{r load file and print first 10 rows}
+data = read.csv("hw1_data.csv")
+names(data)
+head(data, n = 10)
+#Cleaning data from NAs # Missing Values! 
+my_dataframe = na.omit(data)
+
+my_dataframe
+```
+### 1 Sequence of Numbers! 
+```{r Sequence of numbers}
+#Before cleaning data!
+my_sequence = seq_of_rows <- 1:length(data[,2])
+#Below function creates the sequence with the length passed in as argument.
+seq(along.with = seq_of_rows)
+## Replicate 2 times passed argument
+rep(c(names(data)), times = 2)
+## Replicate 2 from each object in argument passed
+rep(c(names(data)), each = 2)
+
+## Check the dimension of Data Frame
+dim(data)
+class(data)
+length(data)
+summary(data)
+
+
+```
+
+### 2. Vectors & Subsetting is done here!
+
+```{r Getting vecotrs}
+minimal <- summary(data)[1,]
+class(minimal)
+maximal <- summary(data)[6,]
+# Getting an exact data from the exact place . 
+new_data = data[3, "Wind"]
+new_data
+## Here we get how many days in the months given, the temperature was above 78
+length(data[which(data$Temp >= 78), "Temp"])
+
+# Subsetting is done here!
+ozone_at_May = subset(my_dataframe$Ozone, my_dataframe$Month ==  5)
+ozone_at_June = subset(my_dataframe$Ozone, my_dataframe$Month == 6)
+max(ozone_at_May)
+max(ozone_at_June)
+
+
+```
+
+
+
+```{r view last 5 rows of our data}
+tail(data, n = 5)
+```
+
+
+
+
+
+## Including Plots
+
+You can also embed plots, for example:
+```{r}
+plot(ozone_at_June)
+plot(ozone_at_May)
+
+#Graphing two lines on one graph!
+
+x  <- seq(1, 10, 0.05)
+y1 <- pnorm(x)
+y2 <- pnorm(x, 1, 1)
+
+
+plot( x, y1, type="l", col="red" ) 
+par(new=TRUE)
+plot( x, y2, type="l", col="green" )
+
+```
