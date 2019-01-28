@@ -21,6 +21,18 @@ head(data, n = 10)
 my_dataframe = na.omit(data)
 
 my_dataframe
+##
+nr = nrow(my_dataframe)
+means <- numeric(nr)
+#means <- my_dataframe[2,]
+means
+for(i in 1:nr) {
+  means [i] <- mean(my_dataframe$Temp[i], na.rm = TRUE)
+}
+means
+
+
+my_dataframe[,4]
 ```
 ### 1 Sequence of Numbers! 
 ```{r Sequence of numbers}
@@ -58,6 +70,7 @@ length(data[which(data$Temp >= 78), "Temp"])
 ozone_at_May = subset(my_dataframe$Ozone, my_dataframe$Month ==  5)
 ozone_at_June = subset(my_dataframe$Ozone, my_dataframe$Month == 6)
 max(ozone_at_May)
+
 max(ozone_at_June)
 
 
@@ -67,6 +80,7 @@ max(ozone_at_June)
 
 ```{r view last 5 rows of our data}
 tail(data, n = 5)
+
 ```
 
 
