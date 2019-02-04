@@ -1,0 +1,97 @@
+---
+title: "Assn3"
+author: "Berdimyrat Mammedov"
+date: "February 3, 2019"
+output: html_document
+---
+
+
+## Assignment 2
+
+
+
+
+## Reading file from csv file
+
+
+```{r  Getting file from the web. }
+file_url <- "http://s3.amazonaws.com/practice_assignment/diet_data.zip"
+download.file(file_url, "diet_data.zip")
+unzip("diet_data.zip", exdir= "diet_data")
+
+```
+
+
+```{r Listing the files in the directory}
+
+list.files("diet_data")
+
+```
+
+```{r Reading and saving files on variables }
+
+andy <- read.csv("diet_data/Andy.csv")
+head(andy, 10)
+
+david <- read.csv("diet_data/David.csv")
+head(david, 10)
+
+```
+
+
+
+```{r Creating 2 vectors  }
+names(andy) 
+
+length(andy$Weight)
+
+dim(andy)  #(rows, coloumns)
+
+andys_weight <- andy[,3]
+
+davids_weight <- david[,3]
+
+
+
+```
+```{r using loop and seq along find the mean}
+
+
+for(i in seq_along(andys_weight)){
+    print(mean(andys_weight[i]))
+}
+
+andys_mean_weight <- mean(andys_weight)
+andys_mean_weight
+
+
+```
+## Mean Function 
+
+```{r own mean function }
+
+mean_function <- function(vect){
+    
+    sum(vect)/length(vect)
+    
+}
+
+mean_function(andys_weight)
+
+```
+
+
+```{r}
+sapply(andys_weight, mean_function)
+
+```
+
+
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
