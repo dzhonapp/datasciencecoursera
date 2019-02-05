@@ -82,16 +82,17 @@ mean_function(andys_weight)
 
 
 ```{r}
-sapply(andys_weight, mean_function)
+listOfAndy_David <- list(a=andys_weight, b=davids_weight)
+
+lapply(listOfAndy_David, mean_function)
+
+
+lapply(listOfAndy_David, sum)
+
+```
+## Writing Data to file!
+```{r write data to csv file}
+write.csv(listOfAndy_David, "AndyAndDavids_Weight")
 
 ```
 
-
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
