@@ -1,0 +1,30 @@
+---
+title: "assn4"
+author: "Berdimyrat Mammedov"
+date: "February 12, 2019"
+output: html_document
+---
+## Downloading the file from the web! 
+
+```{r}
+file_url <- "https://data.maryland.gov/api/views/sx7q-snbm/rows.csv?accessType=DOWNLOAD"
+if(!file.exists("assn4")) {dir.create("assn4")}
+download.file(file_url, destfile = "./assn4/cancerStats.csv")
+dataDownloaded <- date()
+list.files("./assn4")
+
+```
+
+
+```{r Reading the file}
+
+cancerData <- read.csv("./assn4/cancerStats.csv")
+
+head(cancerData)
+tail(cancerData)
+
+dim(cancerData)
+
+
+```
+
