@@ -19,24 +19,141 @@ library(dplyr)
 
 website <- read_html("https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population")
 
-results <- website %>% html_nodes("table")
+results <- website  %>% html_nodes("table") %>% html_table( header = F)
 
-results
+#results <- results[[1]]
+#esults
+results2 <- website %>% html_table()
+
+tableDF <- results2[1]
+tableDF <- tableDF[[1]]
+
+class(tableDF)
+ncol(tableDF)
+nrow(tableDF)
+names(tableDF)
+length(tableDF)
+
+tableDF[,1]
+names(tableDF)[1]
+
+
+#Enumarate first column
+for (row in 1:nrow(tableDF)){
+    tableDF[row, 1] <- row
+}
+
+#Enumarate second column
+for (row in 1:nrow(tableDF)){
+    tableDF[row, 2] <- row
+}
+# remove all commas from Population Estimate column 
+for (row in 1: nrow(tableDF)){
+    tableDF[row, 4] <- str_replace_all(tableDF[row, 4],",", "" )
+}
+# Convert columnt to numeric
+
+tableDF$`Population estimate, July 1, 2018[4]` <- as.numeric(as.character(tableDF$`Population estimate, July 1, 2018[4]`))
+
+#convert column to numeric (This had a problem)
+tableDF$`Census population, April 1, 2010` <- as.numeric(as.character( tableDF$`Census population, April 1, 2010` ))
+
+tableDF$`Percent increase from 2010-2018[note 1]`<-str_replace_all(tableDF$`Percent increase from 2010-2018[note 1]`, "%", "")
+
+tableDF$`Percent increase from 2010-2018[note 1]` <- as.numeric(as.character(tableDF$`Percent increase from 2010-2018[note 1]`))
+#Function to get last character of the cell You will see in the loop why I need this. 
+
+substrRight <- function(x, n){
+  substr(x, nchar(x)-n+1, nchar(x))
+}
+
+for (row in 1:nrow(tableDF)) {
+    if ("1 (non-voting)"  %in% tableDF[row, 7] ) { next }
+    if ("0"  %in% tableDF[row, 7] ) { next }
+    tableDF[row, 7] <- substrRight(tableDF[row, 7], 2)
+    
+}
+
+
+
+# Remove the heart 
+
+tableDF$`Total seats in the U.S. House of Representatives, 2013–2023` <- str_replace_all(tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`, "♠", "")
+
+
+# Remove the G etc
+tableDF$`Total seats in the U.S. House of Representatives, 2013–2023` <- str_replace_all(tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`, "[g)]", "(non-voting)", fixed= TRUE)
+
+
+
+tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`
+
+#Need to work on this too.
+#tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`<- str_replace_all(tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`, "[7000400000000000000<U+2660>]", "")
+tableDF
+```
+
+
+
+
+
+
+
+
+
+```{r}
 
 resultsAsText <- results[1]  %>% html_text()
 
 data_body <- results[1] %>% html_nodes("tbody")
 rows <- data_body %>% html_nodes("tr")
 
-rows_text <- rows %>% html_text()
-rows_text
+rows
 
-clean_rows_text <- str_replace_all(rows_text,"[7000100000000000000]", "")
+rows_text <- rows %>% html_text()
+head(rows_text, 5)
+
+
+clean_rows_text <- str_replace_all(rows_text,"[700000000000000000♠0]", "" )
 
 clean_rows_text <- str_replace_all(clean_rows_text, "\n\n", ":")
 
-clean_rows_text <- str_replace_all(clean_rows_text, "\n", "")
+clean_rows_text <- str_replace_all(clean_rows_text, "\n", " ")
+head(clean_rows_text)
 
+#clean_rows_text_1 <- gsub("7000100000000000000", "", rows_text, fixed = T)
+#clean_rows_text_1 <- gsub("♠.+(?=:)", "", clean_rows_text, fixed = T)
+
+head(clean_rows_text)
+
+test <- unlist(strsplit(clean_rows_text_1[2], split =":", fixed = TRUE))
+test
+
+class(test)
+test[1] <- 1
+
+test[1]
+test[2] <- 1
+
+
+test[3]
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
