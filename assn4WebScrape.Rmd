@@ -91,6 +91,11 @@ tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`
 #Need to work on this too.
 #tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`<- str_replace_all(tableDF$`Total seats in the U.S. House of Representatives, 2013–2023`, "[7000400000000000000<U+2660>]", "")
 tableDF
+headernames <- c("Rank in the fifty states", "Rank in States & Territories", "Name", "Population estimate - July 1, 2018", "Census Pop-tion, Apr 1, 2010", "Increase from 2010-18 (%)", "Total seats in U.S. House of Representatives, 2013-23", "Estimated popl-tion per electoral vote, 2018", "Estimated popl-tion per HOuse seat, 2018", "Census population per House seat, 2010", "Total of the U.S. popl-tion, 2018 (%)")
+
+colnames(tableDF) <- headernames
+tableDF
+
 ```
 
 
