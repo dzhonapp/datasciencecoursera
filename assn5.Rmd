@@ -5,6 +5,8 @@ date: '17 февраля 2019 г '
 output: html_document
 ---
 
+## Here we get website
+
 ```{r}
 
 library(xml2)
@@ -19,11 +21,25 @@ results <- website %>% html_table()
 
 df <-results[2]
 df <- df[[1]]
+
+
+```
+
+## Cleaning the data, changin the header happened here
+
+```{r}
 headerNames <- c("Book", "Author(s)", "Language", "First Published (year)", "Approximate Sales", "Genre")
 headerNames
 colnames(df) <- headerNames
 str(df)
 
+
+
+```
+
+
+## Adding new column here and filling it with required data
+```{r}
 
 #Make a new column filled with 0's
 df[,"Ages"] <- rep(0, nrow(df))
@@ -37,16 +53,24 @@ for (row in 1:nrow(df)) {
     df[row, 5] <- as.numeric((2019 - df[row, 4]))
 }
 
+```
+
+
+
+## The result where we can see Ages (or age of the book)
+
+
+```{r}
+
+df[, c(4,5)]
 
 ```
 
 
 
-
-
-
-
-
+```{r}
+getwd()
+```
 
 
 
