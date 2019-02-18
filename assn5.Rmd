@@ -1,0 +1,64 @@
+---
+title: "assign5"
+author: "Berdimyrat Mammedov"
+date: '17 февраля 2019 г '
+output: html_document
+---
+
+```{r}
+
+library(xml2)
+library(rvest)
+library(magrittr)
+library(stringr)
+library(dplyr)
+
+website <- read_html("https://en.wikipedia.org/wiki/List_of_best-selling_books#Between_50_million_and_100_million_copies")
+
+results <- website %>% html_table()
+
+df <-results[2]
+df <- df[[1]]
+headerNames <- c("Book", "Author(s)", "Language", "First Published (year)", "Approximate Sales", "Genre")
+headerNames
+colnames(df) <- headerNames
+str(df)
+
+
+#Make a new column filled with 0's
+df[,"Ages"] <- rep(0, nrow(df))
+
+#Reorder column so it will be close to year
+#Reordering
+
+df <- df[,c(1, 2, 3, 4, 7, 5, 6)]   
+
+for (row in 1:nrow(df)) {
+    df[row, 5] <- as.numeric((2019 - df[row, 4]))
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

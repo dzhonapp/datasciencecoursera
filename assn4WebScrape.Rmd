@@ -106,44 +106,43 @@ tableDF
 
 
 
-```{r}
+# ```{r}
 
-resultsAsText <- results[1]  %>% html_text()
-
-data_body <- results[1] %>% html_nodes("tbody")
-rows <- data_body %>% html_nodes("tr")
-
-rows
-
-rows_text <- rows %>% html_text()
-head(rows_text, 5)
-
-
-clean_rows_text <- str_replace_all(rows_text,"[700000000000000000♠0]", "" )
-
-clean_rows_text <- str_replace_all(clean_rows_text, "\n\n", ":")
-
-clean_rows_text <- str_replace_all(clean_rows_text, "\n", " ")
-head(clean_rows_text)
-
-#clean_rows_text_1 <- gsub("7000100000000000000", "", rows_text, fixed = T)
-#clean_rows_text_1 <- gsub("♠.+(?=:)", "", clean_rows_text, fixed = T)
-
-head(clean_rows_text)
-
-test <- unlist(strsplit(clean_rows_text_1[2], split =":", fixed = TRUE))
-test
-
-class(test)
-test[1] <- 1
-
-test[1]
-test[2] <- 1
-
-
-test[3]
-
-```
+# resultsAsText <- results[1]  %>% html_text()
+# 
+# data_body <- results[1] %>% html_nodes("tbody")
+# rows <- data_body %>% html_nodes("tr")
+# 
+# rows
+# 
+# rows_text <- rows %>% html_text()
+# head(rows_text, 5)
+# 
+# 
+# clean_rows_text <- str_replace_all(rows_text,"[700000000000000000♠0]", "" )
+# 
+# clean_rows_text <- str_replace_all(clean_rows_text, "\n\n", ":")
+# 
+# clean_rows_text <- str_replace_all(clean_rows_text, "\n", " ")
+# head(clean_rows_text)
+# 
+# #clean_rows_text_1 <- gsub("7000100000000000000", "", rows_text, fixed = T)
+# #clean_rows_text_1 <- gsub("♠.+(?=:)", "", clean_rows_text, fixed = T)
+# 
+# head(clean_rows_text)
+# 
+# test <- unlist(strsplit(clean_rows_text_1[2], split =":", fixed = TRUE))
+# test
+# 
+# class(test)
+# test[1] <- 1
+# 
+# # test[1]
+# test[2] <- 1
+# 
+# 
+# test[3]
+# ```
 
 
 
