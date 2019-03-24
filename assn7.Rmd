@@ -1,7 +1,7 @@
 ---
-title: "assign5"
+title: "assign7"
 author: "Berdimyrat Mammedov"
-date: '17 февраля 2019 г '
+date: '17 March 2019 г '
 output: html_document
 ---
 

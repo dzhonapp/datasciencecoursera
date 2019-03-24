@@ -34,7 +34,11 @@ andy <- read.csv("diet_data/Andy.csv")
 head(andy, 10)
 
 david <- read.csv("diet_data/David.csv")
-head(david, 10)
+david
+head(david, 2)
+david[1:2, 1:2]
+
+david[2, "Age"]
 
 ```
 
@@ -51,7 +55,7 @@ andys_weight <- andy[,3]
 
 davids_weight <- david[,3]
 
-
+is.na(david)
 
 ```
 ```{r using loop and seq along find the mean}
