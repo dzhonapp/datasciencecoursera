@@ -1,0 +1,66 @@
+---
+title: "assn8.Rmd"
+author: "Berdimyrat Mammedov"
+date: '24 марта 2019 г '
+output: html_document
+---
+
+### Assignment 8  (K means clustering!)
+## Getting Data from https://www.kaggle.com/mohansacharya/graduate-admissions#Admission_Predict_Ver1.1.csv
+
+```{r}
+
+list.files("grad_admission")
+
+firstFile <- read.csv("grad_admission/Admission_Predict.csv")
+
+secondFile <- read.csv("grad_admission/Admission_Predict_Ver1.1.csv")
+
+# Bind data together 
+# We need dplyr library 
+library(dplyr)
+myData <- bind_rows (firstFile, secondFile)
+
+```
+
+
+## So Far So Good! Let's See the Summary of our Data!
+```{r}
+summary(myData)
+```
+## Lets Clean and see what missing data we have?!
+```{r}
+install.packages("VIM")
+library(VIM)
+
+aggr(myData)
+
+# We don't have any missing values as you can see below!
+myData <- myData [1:100,]
+
+
+```
+
+## Let's see first few rows of our data to understand how it looks!
+
+```{r}
+head(myData, n = 5)
+
+
+
+## Now Let's begin using K-Means Clusterin!
+
+set.seed(10)
+clusters <- kmeans(myData[1:50, ], 5)
+str(clusters)
+
+names(clusters)
+clusters$cluster
+
+
+plot(myData$GRE.Score, myData$Chance.of.Admit, col=clusters$cluster, pch =19, cex = 2)
+
+points(clusters$centers, col = 1:9, pch = 13, cex = 13, lwd = 13)
+
+```
+
