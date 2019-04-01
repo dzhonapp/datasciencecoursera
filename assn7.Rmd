@@ -60,6 +60,7 @@ for (row in 1:nrow(df)) {
 ```{r}
 
 df[, c(4,5)]
+df
 
 ```
 

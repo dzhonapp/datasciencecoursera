@@ -1,0 +1,50 @@
+---
+title: "assn9"
+author: "Berdimyrat Mammedov"
+date: '31 March 2019 г '
+output: html_document
+---
+
+### Obtaining Data!
+
+## File was downloaded from website: https://www.macrotrends.net/1369/crude-oil-price-history-chart
+```{r}
+getwd()
+setwd("C:/Users/berdi/OneDrive/Documents/datasciencecoursera")
+install.packages("readxl")
+library("readxl")
+file <- read_excel("OilPrices1.xls")
+
+str(file)
+
+```
+## Prediction Process by price ~ Date
+
+```{r}
+data(file)
+y <-file$Per_Gallon_Price; 
+x <- file$observation_date;
+n <- length(y) 
+naa<-length(x)
+n
+
+naa
+fit <- lm(y ~ x)
+
+e <-resid(fit)
+
+yhat <- predict(fit)
+
+
+
+
+plot(x, e, xlab = "Date", ylab = "Oil Prices($)"
+     , bg = "lightblue",
+     col = "black", cex =2, pch =21, frame = FALSE)
+abline(h =0, lwd =2)
+
+for (i in 1: n)
+    lines(c(x[i], x[i]), c(e[i], 0), col = "red", lwd = 1)
+
+```
+
